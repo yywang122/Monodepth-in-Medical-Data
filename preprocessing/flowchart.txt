@@ -1,0 +1,1 @@
+input video --> OCR --> put into the same dirpath
