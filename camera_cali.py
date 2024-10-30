@@ -26,10 +26,10 @@ for dir in dir_li:
         print('~~~~focal~~~')
         print(name)
         objp = np.zeros((5 * 5, 3), np.float32)
-        objp[:, :2] = np.mgrid[0:5, 0:5].T.reshape(-1, 2)  # 将世界坐标系建在标定板上，所有点的Z坐标全部为0，所以只需要赋值x和y
-        objp = float(dir) * objp   # 打印棋盘格一格的边长为3cm
-        obj_points = []     # 存储3D点
-        img_points = []     # 存储2D点
+        objp[:, :2] = np.mgrid[0:5, 0:5].T.reshape(-1, 2)  
+        objp = float(dir) * objp  
+        obj_points = []     # 存3D點
+        img_points = []     # 存2D點
         images=glob.glob("C:/Users/User/Desktop/camera/1117/ch_y%s/%sx/*.JPEG"%(dir,name))  #黑白棋盘的图片路径
         
         for fname in images:
@@ -45,7 +45,7 @@ for dir in dir_li:
                     img_points.append(corners2)
                 else:
                     img_points.append(corners)
-                cv2.drawChessboardCorners(img, (5,5), corners, ret)  # 记住，OpenCV的绘制函数一般无返回值
+                cv2.drawChessboardCorners(img, (5,5), corners, ret) 
                 cv2.waitKey(1)
         _, mtx, dist, rotation,translation = cv2.calibrateCamera(obj_points, img_points, size, None, None)
         
